@@ -69,7 +69,7 @@ spring:
     #启用异步执行器
     job-executor-activate: false
 
-    check-process-definitions: false
+    check-process-definitions: true
     database-schema-update: true
     history-level: full
     db-history-used: true
