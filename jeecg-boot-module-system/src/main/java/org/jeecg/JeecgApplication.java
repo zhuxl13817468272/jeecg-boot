@@ -17,7 +17,13 @@ import java.net.UnknownHostException;
 
 @Slf4j
 @EnableSwagger2
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+//@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+@SpringBootApplication(
+        exclude = {
+                org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
+                org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class
+        }
+)
 public class JeecgApplication {
 
   public static void main(String[] args) throws UnknownHostException {
