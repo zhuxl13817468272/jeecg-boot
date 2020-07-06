@@ -55,10 +55,10 @@ public class UploadController {
             Map<String, String> result = new HashMap<>(2);
             result.put("bpmnName", bpmnName);
             result.put("path",newFile.getAbsolutePath());
-            return RestMessgae.success("文件写入成功", result);
+            return RestMessgae.success("上传成功", result);
         }catch (Exception e){
-            System.out.println("文件写入失败");
-            return RestMessgae.fail("文件写入失败", e.getMessage());
+            System.out.println("上传失败");
+            return RestMessgae.fail("上传失败", e.getMessage());
         }
 
     }
