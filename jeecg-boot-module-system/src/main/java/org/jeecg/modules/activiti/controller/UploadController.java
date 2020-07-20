@@ -5,7 +5,9 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.jeecg.modules.activiti.base.RestMessgae;
+import org.jeecg.modules.activiti.vo.WriteVo;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +18,7 @@ import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  *  上次流程
@@ -31,10 +34,15 @@ public class UploadController {
     @PostMapping(path = "write")
     @ApiOperation(value = "上传流文件到classpath的processes目录下",notes = "上传到classpath的processes目录下")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "bytes",value = "流程图文件二进制流",dataType = "byte[]",paramType = "query"),
+            @ApiImplicitParam(name = "writeVo",value = "流程图文件二进制流",dataType = "WriteVo",paramType = "query"),
             @ApiImplicitParam(name = "fileName",value = "二进制文件名字，如bpmnName.bpmn20.xml和bpmnName.png",dataType = "String",paramType = "query")
     })
-    public RestMessgae write(@RequestParam("bytes") byte[] bytes, @RequestParam("fileName") String fileName) {
+    public RestMessgae write(@RequestBody WriteVo writeVo) {
+        if(Objects.isNull(writeVo)){
+            return RestMessgae.fail("前端参数为空", null);
+        }
+        byte[] bytes = writeVo.getBytes();
+        String fileName = writeVo.getFileName();
         try {
             // 项目根路径文件夹(相对路径)
             String fileDirPath = new String("src/main/resources/processes");
