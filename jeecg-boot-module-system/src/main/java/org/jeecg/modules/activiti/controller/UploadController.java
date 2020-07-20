@@ -34,8 +34,7 @@ public class UploadController {
     @PostMapping(path = "write")
     @ApiOperation(value = "上传流文件到classpath的processes目录下",notes = "上传到classpath的processes目录下")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "writeVo",value = "流程图文件二进制流",dataType = "WriteVo",paramType = "query"),
-            @ApiImplicitParam(name = "fileName",value = "二进制文件名字，如bpmnName.bpmn20.xml和bpmnName.png",dataType = "String",paramType = "query")
+            @ApiImplicitParam(name = "writeVo",value = "流程图文件二进制流",dataType = "WriteVo", paramType = "body")
     })
     public RestMessgae write(@RequestBody WriteVo writeVo) {
         if(Objects.isNull(writeVo)){
